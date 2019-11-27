@@ -1,7 +1,10 @@
 # LuxmedSniper
-LUX MED appointments sniper
+
+LUX MED appointments sniper (twilio)
 =======================================
 Simple tool to notify about available slot in LUX MED medical care service using pushover notifications.
+
+This is a fork of [https://github.com/pawliczka/LuxmedSniper](pawliczka/LuxmedSniper), but using Twilio instead of Pushover.
 
 How to use LuxmedSniper?
 --------------------
