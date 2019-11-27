@@ -6,10 +6,10 @@ import coloredlogs
 import logging
 import os
 import datetime
-import pushover
 import shelve
 import schedule
 import time
+from twilio.rest import Client
 
 # Setup logging
 coloredlogs.install(level="INFO")
@@ -22,16 +22,18 @@ class LuxMedSniper:
     MAIN_PAGE_URL = 'https://portalpacjenta.luxmed.pl/PatientPortal'
     REQUEST_RESERVATION_URL = 'https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Reservation/PartialSearch'
 
+    def send_message(self, text):
+        self.twilio_client.messages.create(to = self.config['twilio']['to'], from_=self.config['twilio']['from'], body=text)
+
     def __init__(self, configuration_file="luxmedSniper.yaml"):
         self.log = logging.getLogger("LuxMedSniper")
         self.log.info("LuxMedSniper logger initialized")
         # Open configuration file
 
         self._loadConfiguration(configuration_file)
+        self.twilio_client = Client(self.config['twilio']['account'], self.config['twilio']['token'])
         self._createSession()
         self._logIn()
-        pushover.init(self.config['pushover']['api_token'])
-        self.pushoverClient = pushover.Client(self.config['pushover']['user_key'])
 
     def _createSession(self):
         self.session = requests.session()
@@ -152,8 +154,8 @@ class LuxMedSniper:
         db.close()
 
     def _sendNotification(self, appointment):
-        self.pushoverClient.send_message(self.config['pushover']['message_template'].format(
-            **appointment, title=self.config['pushover']['title']))
+        text = self.config['twilio']['message_template'].format(**appointment)
+        self.send_message(text)
 
     def _isAlreadyKnown(self, appointment):
         db = shelve.open(self.config['misc']['notifydb'])

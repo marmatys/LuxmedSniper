@@ -1,3 +1,4 @@
+twilio==6.33.1
 beautifulsoup4==4.7.1
 certifi==2019.3.9
 chardet==3.0.4
@@ -8,7 +9,5 @@ idna==2.8
 pyreadline==2.1
 python-pushover==0.4
 pyyaml>=4.2b1
-requests==2.21.0
 schedule==0.6.0
 soupsieve==1.8
-urllib3>=1.24.2
