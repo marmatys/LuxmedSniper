@@ -18,4 +18,9 @@ See `luxmedSniper.yaml` for an example with instructions on how to get the speci
 ```
 python3 luxmedSnip.py -c /path/to/my_favourite_surgeon.yml
 ```
-3) Wait for new appointment notifications in your pushover app on mobile :)!
+
+**Note**: If you're looking for a spot on a fairly available profession,
+it's worth running the sniper once with SMS sending disabled so that you don't send a hundred messages at once and use all your Twilio credit.
+Just comment the content of `def send_message`.
+
+3) Wait for new SMS with appointment notifications on mobile :)!
