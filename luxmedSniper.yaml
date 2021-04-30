@@ -9,7 +9,7 @@ luxmedsniper: #                     mandatory  mandatory
 twilio:
   account: <your twillio AID>
   token: <your twilio token>
-  message_template: "New visit! {AppointmentDate} at {ClinicPublicName} - {DoctorName} ({SpecialtyName}) {AdditionalInfo}"
+  message_template: "New visit! {AppointmentDate} at {ClinicPublicName} - {DoctorName}"
   from: <your twilio sending number>
   to: <number you want to send SMS to>
 misc:
